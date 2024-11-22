@@ -1,4 +1,4 @@
-import { Document, Schema, model } from "mongoose";
+import mongoose, { Document, Schema, Types, model } from "mongoose";
 
 interface IUser extends Document {
   uid: string;
@@ -23,13 +23,14 @@ interface IUser extends Document {
     favoriteTropes: string[];
     favoriteAuthors: string[];
   };
-  bookshelf?: any;
+  bookshelf: [];
+  // bookshelf: Types.ObjectId[];
 }
 
 const userSchema = new Schema<IUser>({
-  uid: { type: String },
-  avatar: { type: String },
-  username: { type: String },
+  uid: { type: String, required: true },
+  avatar: { type: String, required: false },
+  username: { type: String, required: true },
   birthdate: {
     day: { type: String },
     month: { type: String },
@@ -49,7 +50,13 @@ const userSchema = new Schema<IUser>({
     favoriteTropes: { type: Array<string> },
     favoriteAuthors: { type: Array<string> },
   },
-  bookshelf: { type: Schema.Types.Mixed },
+  bookshelf: [],
+  // bookshelf: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "Shelf",
+  //   },
+  // ],
 });
 
 export default model<IUser>("User", userSchema);

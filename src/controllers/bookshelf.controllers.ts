@@ -56,25 +56,25 @@ export const bookshelfController = {
     const bookshelf = await bookshelfSchema.findById(req.params.id);
     console.log(bookshelf);
 
-    if (!bookshelf) {
-      return res.status(404).json({ message: "Shelf not found" });
-    }
+    // if (!bookshelf) {
+    //   return res.status(404).json({ message: "Shelf not found" });
+    // }
 
-    if (!bookshelf[shelf]) {
-      return res.status(400).json({ message: "Invalid shelf specified" });
-    }
+    // if (!bookshelf[shelf]) {
+    //   return res.status(400).json({ message: "Invalid shelf specified" });
+    // }
 
-    const newBook = { id: bookId, thumbnail: thumbnail };
+    // const newBook = { id: bookId, thumbnail: thumbnail };
 
-    if (previousShelf !== undefined) {
-      bookshelf[previousShelf] = bookshelf[previousShelf].filter(
-        (item: any) => item.id !== bookId
-      );
-    }
-    if (shelf !== previousShelf) bookshelf[shelf].push(newBook);
-    await bookshelf.save();
+    // if (previousShelf !== undefined) {
+    //   bookshelf[previousShelf] = bookshelf[previousShelf].filter(
+    //     (item: any) => item.id !== bookId
+    //   );
+    // }
+    // if (shelf !== previousShelf) bookshelf[shelf].push(newBook);
+    // await bookshelf.save();
 
-    res.status(200).json(bookshelf);
+    // res.status(200).json(bookshelf);
   },
   createShelf: async function (req: Request, res: Response) {
     console.log("HELOOO ??");
@@ -83,28 +83,28 @@ export const bookshelfController = {
 
     console.log("NAME", name);
 
-    try {
-      const bookshelf = await bookshelfSchema.findById(req.params.id);
+    //   try {
+    //     const bookshelf = await bookshelfSchema.findById(req.params.id);
 
-      if (!bookshelf) {
-        return res.status(404).json({ error: "Bookshelf not found" });
-      }
+    //     if (!bookshelf) {
+    //       return res.status(404).json({ error: "Bookshelf not found" });
+    //     }
 
-      if (bookshelf[name]) {
-        return res.status(400).json({ error: "Shelf already exists" });
-      }
+    //     if (bookshelf[name]) {
+    //       return res.status(400).json({ error: "Shelf already exists" });
+    //     }
 
-      bookshelf[name] = [];
+    //     bookshelf[name] = [];
 
-      console.log("new shelf", bookshelf, bookshelf[name]);
+    //     console.log("new shelf", bookshelf, bookshelf[name]);
 
-      await bookshelf.save();
+    //     await bookshelf.save();
 
-      res.status(201).json(bookshelf);
-    } catch (error: any) {
-      res
-        .status(500)
-        .json({ error: "Error adding shelf", details: error.message });
-    }
+    //     res.status(201).json(bookshelf);
+    //   } catch (error: any) {
+    //     res
+    //       .status(500)
+    //       .json({ error: "Error adding shelf", details: error.message });
+    //   }
   },
 };
